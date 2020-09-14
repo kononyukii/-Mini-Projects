@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
   <body>
-      <input type="text" name="" id="">
-      <input type="text" name="" id="">
-      <input type="text" name="" id="">
-      <script>
+    <h1>Калькулятор квадрата</h1>
+    <div>
+      <p id="area">Площадь квадрата:</p>
+      <p id="perimeter">Периметр квадрата:</p>
+    </div>
+    <br />
+    <input type="text" placeholder="Длина стороны квадрата" />
+    <button>ok</button>
+    <script>
+      let button = document.querySelector("button");
+      let input = document.querySelector("input");
+      let area = document.querySelector("#area");
+      let perimeter = document.querySelector("#perimeter");
 
-      </script>
+      button.addEventListener("click", function func() {
+        area.innerHTML = "Площадь квадрата: " + Number(input.value) ** 2;
+        perimeter.innerHTML = "Периметр квадрата: " + Number(input.value) * 4;
+      });
+    </script>
   </body>
 </html>
