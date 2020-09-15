@@ -7,27 +7,65 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Калькулятор круга</h1>
-    <div>
-      <p id="area">Площадь круга:</p>
-      <p id="perimeter">Периметр круга:</p>
+    <h1>Калькулятор треугольника</h1>
+    <div id="calc">
+      <p id="area">Площадь треугольника:</p>
+      <p id="perimeter">Периметр треугольника:</p>
     </div>
     <br />
-    <input type="number" placeholder="Радиус круга" id="radius"/>
+    <input type="number" placeholder="Длина стороны a" id="lenght_a" />
+    <br />
+    <br />
+    <input type="number" placeholder="Длина стороны b" id="lenght_b" />
+    <br />
+    <br />
+    <input type="number" placeholder="Длина стороны c" id="lenght_c" />
+
     <button>Ok</button>
+    <div id="text">
+      <h2>Как найти площадь треугольника по трем сторонам</h2>
+      <p>
+        Один из способов расчета площади треугольника — использование формулы
+        Герона. Для того, что бы найти площадь треугольника, необходимо знать
+        три его стороны. Вы можете воспользоваться нашим онлайн калькулятором
+        или же использовать формулу и произвести расчет самостоятельно.
+      </p>
+      <p>
+        Сначала рассчитывают периметр треугольника. Напоминаем, что периметр —
+        это сумма длин сторон. Предположим, что наш треугольник имеет стороны
+        длиной 15, 13 и 17 сантиметров. Тогда его периметр будет равен:
+      </p>
+      <p><b>P = a + b + c = 15 + 13 + 17 = 45см.</b></p>
+      <p>После этого находим полупериметр, т. е. делим периметр на 2:</p>
+      <p><b>p = P / 2 = 45 / 2 = 22,5 см.</b></p>
+      <p>
+        После этого подставляем значения в формулу Герона и получаем результат:
+      </p>
+      <p><b>S = 93.899880191617 см2</b></p>
+      <h3>Формула Герона</h3>
+      <img
+        src="https://calculat.ru/wp-content/uploads/2018/11/ploshad-treugolnika-po-trem-storonam.png"
+        alt="Formulas Heron"
+      />
+    </div>
     <script>
       let button = document.querySelector("button");
-      let input = document.querySelector("#radius");
+      let inputA = document.querySelector("#lenght_a");
+      let inputB = document.querySelector("#lenght_b");
+      let inputC = document.querySelector("#lenght_c");
       let area = document.querySelector("#area");
       let perimeter = document.querySelector("#perimeter");
 
       button.addEventListener("click", function func() {
-        area.innerHTML =
-          "Площадь круга: " +
-          (Math.PI * (Number(input.value) ** 2)).toFixed(4);
-        perimeter.innerHTML =
-          "Периметр круга: " +
-          (2 * Math.PI * Number(input.value)).toFixed(4);
+        let a = Number(inputA.value);
+        let b = Number(inputB.value);
+        let c = Number(inputC.value);
+        let perimeterTriangle = a + b + c;
+        let p = perimeterTriangle / 2;
+        let formulasHeron = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+
+        perimeter.innerHTML = "Периметр треугольника: " + perimeterTriangle;
+        area.innerHTML = "Площадь треугольника: " + formulasHeron.toFixed(3);
       });
     </script>
   </body>
