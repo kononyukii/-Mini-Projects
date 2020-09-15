@@ -7,23 +7,29 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Калькулятор квадрата</h1>
+    <h1>Калькулятор прямоугольника</h1>
     <div>
-      <p id="area">Площадь квадрата:</p>
-      <p id="perimeter">Периметр квадрата:</p>
+      <p id="area">Площадь прямоугольника:</p>
+      <p id="perimeter">Периметр прямоугольника:</p>
     </div>
     <br />
-    <input type="text" placeholder="Длина стороны квадрата" />
-    <button>ok</button>
+    <input type="number" placeholder="Длина прямоугольника" id="length" />
+    <input type="number" placeholder="Ширина прямоугольника" id="width" />
+    <button>Ok</button>
     <script>
       let button = document.querySelector("button");
-      let input = document.querySelector("input");
+      let inputA = document.querySelector("#length");
+      let inputB = document.querySelector("#width");
       let area = document.querySelector("#area");
       let perimeter = document.querySelector("#perimeter");
 
       button.addEventListener("click", function func() {
-        area.innerHTML = "Площадь квадрата: " + Number(input.value) ** 2;
-        perimeter.innerHTML = "Периметр квадрата: " + Number(input.value) * 4;
+        area.innerHTML =
+          "Площадь прямоугольника: " +
+          Number(inputA.value) * Number(inputB.value) + 'см&sup2;';
+        perimeter.innerHTML =
+          "Периметр прямоугольника: " +
+          (Number(inputA.value) + Number(inputB.value)) * 2 + 'см';
       });
     </script>
   </body>
