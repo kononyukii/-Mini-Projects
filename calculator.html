@@ -7,29 +7,27 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Калькулятор прямоугольника</h1>
+    <h1>Калькулятор круга</h1>
     <div>
-      <p id="area">Площадь прямоугольника:</p>
-      <p id="perimeter">Периметр прямоугольника:</p>
+      <p id="area">Площадь круга:</p>
+      <p id="perimeter">Периметр круга:</p>
     </div>
     <br />
-    <input type="number" placeholder="Длина прямоугольника" id="length" />
-    <input type="number" placeholder="Ширина прямоугольника" id="width" />
+    <input type="number" placeholder="Радиус круга" id="radius"/>
     <button>Ok</button>
     <script>
       let button = document.querySelector("button");
-      let inputA = document.querySelector("#length");
-      let inputB = document.querySelector("#width");
+      let input = document.querySelector("#radius");
       let area = document.querySelector("#area");
       let perimeter = document.querySelector("#perimeter");
 
       button.addEventListener("click", function func() {
         area.innerHTML =
-          "Площадь прямоугольника: " +
-          Number(inputA.value) * Number(inputB.value) + 'см&sup2;';
+          "Площадь круга: " +
+          (Math.PI * (Number(input.value) ** 2)).toFixed(4);
         perimeter.innerHTML =
-          "Периметр прямоугольника: " +
-          (Number(inputA.value) + Number(inputB.value)) * 2 + 'см';
+          "Периметр круга: " +
+          (2 * Math.PI * Number(input.value)).toFixed(4);
       });
     </script>
   </body>
