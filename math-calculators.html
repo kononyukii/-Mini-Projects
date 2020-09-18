@@ -7,32 +7,56 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Делители числа</h1>
+    <h1>Общие делители чисел</h1>
     <div id="calc">
       <p id="result"></p>
     </div>
     <div>
-      <input type="number" placeholder="введите число" />
+      <input type="number" placeholder="введите число" id="num_a" />
+      <input type="number" placeholder="введите число" id="num_b" />
       <button>Ok</button>
     </div>
     <script>
       let button = document.querySelector("button");
-      let input = document.querySelector("input");
+      let inputA = document.querySelector("#num_a");
+      let inputB = document.querySelector("#num_b");
       let result = document.querySelector("#result");
 
       button.addEventListener("click", function () {
-        let num = Number(input.value);
-        let arr = [];
-    
-        for (i = 1; i <= num; i++) {
-            if (num % i == 0) {
-                arr.push(i);
-            }
+        let numA = Number(inputA.value);
+        let numB = Number(inputB.value);
+        let arrA = [];
+        let arrB = [];
+
+        for (i = 1, j = 1; i <= numA, j <= numB; i++, j++) {
+          if (numA % i == 0) {
+            arrA.push(i);
+          }
+          if (numB % j == 0) {
+            arrB.push(j);
+          }
         }
 
-        let str = arr.join(', ')
-        result.innerHTML = 'Делители этого числа: ' + str;
+        let str = getInt(arrA, arrB).join(', ')
+
+        result.innerHTML = "Общие делители этих чисел: " + str;
       });
+
+      function getInt(arr1, arr2) {
+        let result = [];
+
+        for (let elem of arr1) {
+          if (inArray(elem, arr2)) {
+            result.push(elem);
+          }
+        }
+
+        return result;
+      }
+
+      function inArray(elem, arr) {
+        return arr.indexOf(elem) !== -1;
+      }
     </script>
   </body>
 </html>
