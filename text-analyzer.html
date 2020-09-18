@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Количество слов в тексте</h1>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <p></p>
+    <script>
+        let textarea = document.querySelector('textarea');
+        let par = document.querySelector('p');
+
+        textarea.addEventListener('blur', function() {
+            let arr = textarea.value.split(' ');
+            par.innerHTML = 'В тексте ' + arr.length + ' слов';
+        });
+    </script>
+</body>
+</html>
