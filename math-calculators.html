@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Корни квадратного уравнения</h1>
+    <div id="calc">
+      <p id="root_x1"></p>
+      <p id="root_x2"></p>
+      <p id="no_decision"></p>
+    </div>
+    <div>
+      <input type="number" placeholder="a" id="coeff_a" />
+      x&sup2; +
+      <input type="number" placeholder="b" id="coeff_b" />
+      x +
+      <input type="number" placeholder="c" id="coeff_c" />
+      <button>Ok</button>
+    </div>
+    <script>
+      let button = document.querySelector("button");
+      let inputA = document.querySelector("#coeff_a");
+      let inputB = document.querySelector("#coeff_b");
+      let inputC = document.querySelector("#coeff_c");
+      let rootX1 = document.querySelector("#root_x1");
+      let rootX2 = document.querySelector("#root_x2");
+      let noDecision = document.querySelector('#no_decision');
+
+      button.addEventListener('click', function() {
+        let a = Number(inputA.value);
+        let b = Number(inputB.value);
+        let c = Number(inputC.value);
+        let discriminant = (Math.pow(b, 2)) - (4 * a * c);
+        
+        if (discriminant > 0) {
+            let x1 = (-b - Math.sqrt(discriminant)) / Math.pow(a, 2);
+            let x2 = (-b + Math.sqrt(discriminant)) / Math.pow(a, 2);
+            rootX1.innerHTML = 'x<sub>1</sub> = ' + x1;
+            rootX2.innerHTML = 'x<sub>2</sub> = ' + x2;
+            noDecision.innerHTML = '';
+        } else if (discriminant < 0) {
+            rootX1.innerHTML = '';
+            rootX2.innerHTML = '';
+            noDecision.innerHTML = 'уравнение не имеет действительных решений';
+        } else {
+            let x = -(b / (2 * a));
+            rootX1.innerHTML = 'x = x<sub>1</sub> = x<sub>2</sub> = ' + x;
+            rootX2.innerHTML = '';
+            noDecision.innerHTML = '';
+        }
+      });
+    </script>
+  </body>
+</html>
