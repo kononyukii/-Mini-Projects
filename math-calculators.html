@@ -7,7 +7,7 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Общие делители чисел</h1>
+    <h1>Наибольший общий делитель</h1>
     <div id="calc">
       <p id="result"></p>
     </div>
@@ -37,9 +37,9 @@
           }
         }
 
-        let str = getInt(arrA, arrB).join(', ')
+        let str = getInt(arrA, arrB).pop();
 
-        result.innerHTML = "Общие делители этих чисел: " + str;
+        result.innerHTML = "Наибольший общий делитель: " + str;
       });
 
       function getInt(arr1, arr2) {
