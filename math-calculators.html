@@ -7,37 +7,31 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Пифагорова тройка</h1>
-    <p>a&sup2; + b&sup2; = c&sup2;</p>
-    <p><i> *c &#62; a &amp; b</i></p>
+    <h1>Делители числа</h1>
     <div id="calc">
       <p id="result"></p>
     </div>
     <div>
-      <input type="number" placeholder="a" id="num_a" />
-      <input type="number" placeholder="b" id="num_b" />
-      <input type="number" placeholder="c" id="num_c" />
+      <input type="number" placeholder="введите число" />
       <button>Ok</button>
     </div>
     <script>
       let button = document.querySelector("button");
-      let inputA = document.querySelector("#num_a");
-      let inputB = document.querySelector("#num_b");
-      let inputC = document.querySelector("#num_c");
+      let input = document.querySelector("input");
       let result = document.querySelector("#result");
 
       button.addEventListener("click", function () {
-        let a = Number(inputA.value);
-        let b = Number(inputB.value);
-        let c = Number(inputC.value);
-        let triplePythagorean =
-          Math.pow(a, 2) + Math.pow(b, 2) === Math.pow(c, 2);
-
-        if (triplePythagorean) {
-          result.innerHTML = "Эти числа являются тройкой Пифагора";
-        } else {
-          result.innerHTML = "Эти числа не являются тройкой Пифагора";
+        let num = Number(input.value);
+        let arr = [];
+    
+        for (i = 1; i <= num; i++) {
+            if (num % i == 0) {
+                arr.push(i);
+            }
         }
+
+        let str = arr.join(', ')
+        result.innerHTML = 'Делители этого числа: ' + str;
       });
     </script>
   </body>
