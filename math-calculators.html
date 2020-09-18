@@ -7,50 +7,36 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Корни квадратного уравнения</h1>
+    <h1>Пифагорова тройка</h1>
+    <p>a&sup2; + b&sup2; = c&sup2;</p>
+    <p><i> *c &#62; a &amp; b</i></p>
     <div id="calc">
-      <p id="root_x1"></p>
-      <p id="root_x2"></p>
-      <p id="no_decision"></p>
+      <p id="result"></p>
     </div>
     <div>
-      <input type="number" placeholder="a" id="coeff_a" />
-      x&sup2; +
-      <input type="number" placeholder="b" id="coeff_b" />
-      x +
-      <input type="number" placeholder="c" id="coeff_c" />
+      <input type="number" placeholder="a" id="num_a" />
+      <input type="number" placeholder="b" id="num_b" />
+      <input type="number" placeholder="c" id="num_c" />
       <button>Ok</button>
     </div>
     <script>
       let button = document.querySelector("button");
-      let inputA = document.querySelector("#coeff_a");
-      let inputB = document.querySelector("#coeff_b");
-      let inputC = document.querySelector("#coeff_c");
-      let rootX1 = document.querySelector("#root_x1");
-      let rootX2 = document.querySelector("#root_x2");
-      let noDecision = document.querySelector('#no_decision');
+      let inputA = document.querySelector("#num_a");
+      let inputB = document.querySelector("#num_b");
+      let inputC = document.querySelector("#num_c");
+      let result = document.querySelector("#result");
 
-      button.addEventListener('click', function() {
+      button.addEventListener("click", function () {
         let a = Number(inputA.value);
         let b = Number(inputB.value);
         let c = Number(inputC.value);
-        let discriminant = (Math.pow(b, 2)) - (4 * a * c);
-        
-        if (discriminant > 0) {
-            let x1 = (-b - Math.sqrt(discriminant)) / Math.pow(a, 2);
-            let x2 = (-b + Math.sqrt(discriminant)) / Math.pow(a, 2);
-            rootX1.innerHTML = 'x<sub>1</sub> = ' + x1;
-            rootX2.innerHTML = 'x<sub>2</sub> = ' + x2;
-            noDecision.innerHTML = '';
-        } else if (discriminant < 0) {
-            rootX1.innerHTML = '';
-            rootX2.innerHTML = '';
-            noDecision.innerHTML = 'уравнение не имеет действительных решений';
+        let triplePythagorean =
+          Math.pow(a, 2) + Math.pow(b, 2) === Math.pow(c, 2);
+
+        if (triplePythagorean) {
+          result.innerHTML = "Эти числа являются тройкой Пифагора";
         } else {
-            let x = -(b / (2 * a));
-            rootX1.innerHTML = 'x = x<sub>1</sub> = x<sub>2</sub> = ' + x;
-            rootX2.innerHTML = '';
-            noDecision.innerHTML = '';
+          result.innerHTML = "Эти числа не являются тройкой Пифагора";
         }
       });
     </script>
