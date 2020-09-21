@@ -7,37 +7,86 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Количество символов в тексте</h1>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <h1>Анализатор текста на JavaScript</h1>
+    <textarea name="" id="" cols="30" rows="10" placeholder="Введите текст"></textarea>
+    <h4>Выберите желаемые параметры</h4>
+    <input type="checkbox" id="word" />
+    <label for="word">Количество слов</label> <br />
+    <input type="checkbox" id="symbol" />
+    <label for="symbol">Количество символов</label> <br />
+    <input type="checkbox" id="close" />
+    <label for="close">Количество символов бп</label> <br />
+    <input type="checkbox" id="percent" />
+    <label for="percent">Количество символов в %</label> <br />
     <p></p>
+
     <script>
       let textarea = document.querySelector("textarea");
+
+      let inputWord = document.querySelector("#word");
+      let inputSymbol = document.querySelector("#symbol");
+      let inputClose = document.querySelector("#close");
+      let inputPercent = document.querySelector("#percent");
       let par = document.querySelector("p");
 
+      textarea.addEventListener('click', () => par.innerHTML = '');
+
       textarea.addEventListener("blur", function () {
+        let arrWord = textarea.value.split(" ");
         let arr = textarea.value.split("");
         let i = 0;
 
-        for (let elem of arr) {
-          if (elem != " ") {
-            i++;
-          }
-        }
-        par.innerHTML = "В тексте " + i + " символов:";
-
-        let allSymbols =
-          "abcdefghijklmnopqrstuvwxyz0123456789йцукенгшщзхъфывапролджэячсмитьбю`-=~@#$%^&*()_+;'][\!:ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮQWERTYUIOPASDFGHJKLZXCVBNM";
-        let statistic = '';
-
-        for (let symbol of allSymbols) {
-            if (arr.indexOf(symbol) != -1) {
-                statistic += ' ' + getPersentText(arr, symbol) + '; ';
+        if (inputWord.checked) {
+          let newArr = [];
+          arrWord.forEach(function (elem) {
+            if (elem != "") {
+              newArr.push(elem);
             }
+          });
+          par.innerHTML = '<b>' + "Количество слов: " + '</b>' + newArr.length + "<br>";
         }
-        par.innerHTML +=  statistic;
 
-        function getPersentText(arr, symb) {
-            return symb + ': ' + Math.round(arr.filter((elem) => elem === symb).length / arr.length * 100) +'%';
+        if (inputSymbol.checked) {
+          par.innerHTML += '<b>' + "Количество символов: " + '</b>' + arr.length + "<br>";
+        }
+
+        if (inputClose.checked) {
+          for (let elem of arr) {
+            if (elem != " ") {
+              i++;
+            }
+          }
+          par.innerHTML += '<b>' + "Количество символов бп: " + '</b>' + i + "<br>";
+        }
+
+        if (inputPercent.checked) {
+          let newPerArr = [];
+          for (let elem of arr) {
+            if (elem != " ") {
+                newPerArr.push(elem);
+            }
+          }
+          let allSymbols =
+            "abcdefghijklmnopqrstuvwxyz0123456789йцукенгшщзхъфывапролджэячсмитьбю`-=~@#$%^&*()_+;'][\!:ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮQWERTYUIOPASDFGHJKLZXCVBNM";
+          let statistic = "";
+
+          for (let symbol of allSymbols) {
+            if (newPerArr.indexOf(symbol) != -1) {
+              statistic += " " + getPersentText(newPerArr, symbol) + "; ";
+            }
+          }
+          par.innerHTML += '<b>' + 'Количество символов в %: ' + '</b>' + statistic;
+
+          function getPersentText(arr, symb) {
+            return (
+              symb +
+              ": " +
+              Math.round(
+                (arr.filter((elem) => elem === symb).length / arr.length) * 100
+              ) +
+              "%"
+            );
+          }
         }
       });
     </script>
