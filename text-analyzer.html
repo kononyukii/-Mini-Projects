@@ -16,7 +16,14 @@
 
         textarea.addEventListener('blur', function() {
             let arr = textarea.value.split('');
-            par.innerHTML = 'В тексте ' + arr.length + ' символов';    
+            let i = 0;
+
+            for (let elem of arr) {
+                if (elem != ' ') {
+                    i++;
+                }
+            }
+            par.innerHTML = 'В тексте ' + i + ' символов';    
         });
     </script>
 </body>
