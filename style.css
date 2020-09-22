@@ -1,4 +1,15 @@
 h1 {
-    width: 200px;
+    width: 300px;
     text-align: center;
+}
+p {
+    width: 300px;
+    text-align: justify;
+}
+
+.color_right {
+    color: seagreen;
+}
+.color_not_right {
+    color: red;
 }

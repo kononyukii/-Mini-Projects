@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Игра угадай число</h1>
+    <p>Компьютер загадывает число от 1 до 100. Попробуйте угадать число.</p>
+    <input type="number" name="" id="numb" />
+    <button>Проверить</button>
+    <p id="prompt"></p>
+    <script>
+      /*
+              Игра угадай число на JavaScript
+      В этой игре компьютер загадывает число от 1 до 100.
+      В инпут на экране игрок вводит число от 1 до 100, пытаясь угадать,
+      что же загадал компьютер.
+
+      Если игрок ввел число, меньше загаданного, компьютер должен написать
+      'введите число побольше', а если введено больше загаданного, то,
+      соответственно, компьютер должен написать 'введите число поменьше'.
+              */
+      "use strict";
+
+      let input = document.getElementById("numb");
+      let par = document.querySelector("#prompt");
+      let button = document.querySelector("button");
+      let i = 0;
+
+      let number = getRandomInt(1, 100);
+
+      button.addEventListener("click", function () {
+        if (Number(input.value) < number) {
+          par.innerHTML = "введите число побольше";
+          par.classList.add("color_not_right");
+        } else if (Number(input.value) > number) {
+          par.innerHTML = "введите число поменьше";
+          par.classList.add("color_not_right");
+        } else {
+          let button = document.createElement("button");
+          button.innerHTML = "нaчать заново";
+          
+
+          par.innerHTML = "поздравляем вы угадали число с " + i + " раза";
+          par.classList.remove("color_not_right");
+          par.classList.add("color_right");
+
+          button.addEventListener("click", function () {
+            number = getRandomInt(1, 100);
+            i = 0;
+            input.value = '';
+            par.innerHTML = '';
+          });
+
+          par.appendChild(button);
+        }
+
+        i++;
+      });
+
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+    </script>
+  </body>
+</html>
