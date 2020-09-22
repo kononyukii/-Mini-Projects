@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Транслит на JavaScript</h1>
+    <textarea
+      id="text"
+      cols="30"
+      rows="10"
+      placeholder="Введите текст"
+    ></textarea>
+    <br />
+    <input type="checkbox" name="" id="check" />
+    <label for="check">Перевести в транслит</label>
+    <div id="translate"></div>
+    <script>
+      let text = document.querySelector("#text");
+      let div = document.querySelector("#translate");
+      let checkbox = document.querySelector("#check");
+      let ru = {
+        а: "a",
+        б: "b",
+        в: "v",
+        г: "g",
+        д: "d",
+        е: "e",
+        ё: "e",
+        ж: "j",
+        з: "z",
+        и: "i",
+        й: "j",
+        к: "k",
+        л: "l",
+        м: "m",
+        н: "n",
+        о: "o",
+        п: "p",
+        р: "r",
+        с: "s",
+        т: "t",
+        у: "u",
+        ф: "f",
+        х: "h",
+        ц: "c",
+        ч: "ch",
+        ш: "sh",
+        щ: "shch",
+        ы: "y",
+        э: "e",
+        ю: "u",
+        я: "ya",
+        " ": " ",
+      };
+
+      let en = {
+        a: "а",
+        b: "б",
+        v: "в",
+        g: "г",
+        d: "д",
+        e: "е",
+        e: "ё",
+        j: "ж",
+        z: "з",
+        i: "и",
+        k: "к",
+        l: "л",
+        m: "м",
+        n: "н",
+        o: "о",
+        p: "п",
+        r: "р",
+        s: "с",
+        t: "т",
+        u: "у",
+        f: "ф",
+        h: "х",
+        c: "ц",
+        ch: "ч",
+        sh: "ш",
+        shch: "щ",
+        y: "ы",
+        e: "е",
+        u: "ю",
+        ya: "я",
+      };
+
+      text.addEventListener("input", function () {
+        if (checkbox.checked) {
+          let elems = text.value.split("");
+          let str = "";
+
+          for (let elem of elems) {
+            if (ru[elem] != undefined) {
+              div.innerHTML = str += ru[elem];
+            } else if (ru[elem.toLowerCase()] != undefined) {
+              div.innerHTML = str += ru[elem.toLowerCase()].toUpperCase();
+            } else {
+              div.innerHTML = str += elem;
+            }
+          }
+        }
+        if (!checkbox.checked) {
+          let elems = text.value.split("");
+          let str = "";
+
+          for (let elem of elems) {
+            if (en[elem] != undefined) {
+              div.innerHTML = str += en[elem];
+            } else if (en[elem.toLowerCase()] != undefined) {
+              div.innerHTML = str += en[elem.toLowerCase()].toUpperCase();
+            } else {
+              div.innerHTML = str += elem;
+            }
+          }
+        }
+      });
+
+      text.addEventListener("click", () => (div.innerHTML = ""));
+    </script>
+  </body>
+</html>
