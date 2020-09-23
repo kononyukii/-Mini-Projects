@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Игра угадай ячейку</h1>
+    <p>
+      Компьютер случайным образом запоминает 10 ячеек из таблицы. Игроку нужно
+      кликать на клетки пока он не найдет все загаданные компьютером клетки. У
+      вас есть ровно одна минута чтобы открыть все клетки.
+    </p>
+    <p id="par">
+      Время до поражения: 00.<span id="fix_time"></span
+      ><span id="timer">00</span>
+    </p>
+    <table id="table">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <p id="vin"></p>
+    <script>
+      "use strict";
+      /*
+        В этой игре будет дана таблица 10 на 10. Компьютер случайным образом запоминает 10 ячеек из этой таблицы.
+        Игроку нужно кликать на клетки пока он не найдет все загаданные компьютером клетки.
+        */
+
+      let table = document.querySelector("#table");
+      let tds = document.querySelectorAll("#table td");
+      let par = document.querySelector("#par");
+      let timer = document.querySelector("#timer");
+      let fixTime = document.querySelector("#fix_time");
+      let numbersArr = [];
+      let i = 0;
+      let j = 0;
+      let k = 0;
+
+      let res = document.createElement("p");
+      document.body.appendChild(res);
+
+      table.addEventListener("click", function time() {
+        timer.innerHTML = "59";
+        let timerId = setInterval(function () {
+          timer.innerHTML = Number(timer.innerHTML) - 1;
+          if (timer.innerHTML == "9") {
+            fixTime.innerHTML = "0";
+          }
+          if (timer.innerHTML == "0") {
+            res.innerHTML =
+              "Вы не успели открыть все ячейки и проиграли. Количество правильных ответов: " +
+              j;
+            par.innerHTML = "";
+            res.id = "fail";
+            table.classList.add("color_not_right");
+
+            clearInterval(timerId);
+          }
+          if (j == 10) {
+            clearInterval(timerId);
+            res.innerHTML =
+              "Вы открыли все ячейки, поздравляем! Количество ходов: " +
+              k +
+              "<br>" +
+              par.innerHTML +
+              " секунд";
+            par.innerHTML = "";
+            res.id = "vin";
+            table.classList.add("color_right");
+          }
+        }, 1000);
+
+        this.removeEventListener("click", time);
+      });
+
+      for (let td of tds) {
+        i++;
+        td.id = i;
+        numbersArr.push(i);
+
+        td.addEventListener("click", function () {
+          if (hiddenТumber.indexOf(Number(td.id)) === -1) {
+            td.classList.add("color_not_right");
+            k++;
+          } else {
+            td.classList.add("color_right");
+            j++;
+            k++;
+          }
+        });
+      }
+
+      let hiddenТumber = randoms(numbersArr, 10);
+      console.log(hiddenТumber);
+
+      function randoms(arr, length) {
+        return first(shuffle(arr), length);
+      }
+
+      function first(arr, length) {
+        return arr.slice(0, length);
+      }
+
+      function shuffle(arr) {
+        let result = [];
+
+        while (arr.length > 0) {
+          let random = getRandomInt(0, arr.length - 1);
+          let elem = arr.splice(random, 1)[0];
+          result.push(elem);
+        }
+
+        return result;
+      }
+
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+    </script>
+  </body>
+</html>
