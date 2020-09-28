@@ -1,28 +1,51 @@
 h1 {
-    width: 550px;
-    text-align: center;
-}
-p {
-    width: 550px;
-    text-align: justify;
+  text-align: center;
+  width: 750px;
 }
 
-.color_right {
-    background-color: seagreen;
-}
-.color_not_right {
-    background-color: red;
-}
-td {
-	width: 50px;
-	height: 50px;
-	border: 1px solid black;
+input {
+  width: 750px;
+  height: 100px;
+  margin-bottom: 20px;
 }
 
-#vin {
-    color: green ;
-    font: 20px bold serif;
+#keyboard {
+  flex-direction: column;
+  display: flex;
+  width: 500px;
 }
-#fail {
-    color: red;
+
+#keyboard > div {
+  width: auto;
+  height: 50px;
+  width: 760px;
+  margin: 2px 0;
+  display: flex;
+  flex-direction: row;
+}
+
+#keyboard > div > div {
+  width: 50px;
+  border: 1px solid black;
+  margin-left: 1px;
+  box-shadow: -1px 1px rgb(48, 47, 47);
+}
+
+.shift,
+.caps_lock,
+.space,
+.tab,
+.backspace {
+  flex-grow: 1;
+}
+
+.active_button {
+  cursor: pointer;
+  background-color: rgb(236, 235, 235);
+}
+
+.key_symb {
+  position: relative;
+  top: 40%;
+  left: 40%;
 }
