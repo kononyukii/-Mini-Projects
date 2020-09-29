@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Калькулятор</h1>
+    <div id="wrap">
+      <p></p>
+      <input type="text" disabled />
+      <div class="row">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="plus"></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="minus"></div>
+      </div>
+      <div class="row">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="multiply"></div>
+      </div>
+      <div class="row">
+        <div class="clear"></div>
+        <div></div>
+        <div class="equal"></div>
+        <div class="divide"></div>
+      </div>
+    </div>
+    <script>
+      "use strict";
+      /*
+        Реализуем калькулятор. Он будет работать как обычный
+        классический калькулятор: у нас будет инпут,
+        а под ним кнопочки с цифрами и знаками операций.
+        По нажатию на цифры они должны появляться в инпуте. 
+        По нажатию на знак операции число из инпута должно исчезать. 
+        После этого при вводе следующего числа в инпут 
+        и нажатия на знак равно в инпуте должен появится результат операции.
+        */
+      /*
+       Сделайте так, чтобы над инпутом 
+       выводились введенные числа и между ними знак операции.
+       */
+      /*
+       Сделайте кнопку сброса, которая будет очищать инпут для ввода, 
+       а также отменять операцию, если ранее была нажата кнопка операции.
+       */
+      /*
+       Сделайте кнопку для памяти. Пусть она запоминает результат какой-нибудь операции. 
+       Сделайте кнопку для вставки в инпут результата из памяти.
+       */
+
+      let buttons = document.querySelectorAll("#wrap .row div");
+      let symbol = [7, 8, 9, "+", 4, 5, 6, "-", 1, 2, 3, "*", "C", 0, "=", "/"];
+      let input = document.querySelector("input");
+      let par = document.querySelector("p");
+      let num = "";
+      let symb = "";
+
+      for (let button of buttons) {
+        let span = document.createElement("span");
+        span.innerHTML = symbol.splice(0, 1);
+        span.classList.add("button_symb");
+        button.appendChild(span);
+
+        button.addEventListener("mouseover", function () {
+          this.classList.add("active_button");
+          button.addEventListener("mouseout", () =>
+            this.classList.remove("active_button")
+          );
+        });
+
+        button.addEventListener("click", function () {
+          //number button
+          if (
+            !button.classList.contains("plus") &&
+            !button.classList.contains("minus") &&
+            !button.classList.contains("multiply") &&
+            !button.classList.contains("clear") &&
+            !button.classList.contains("equal") &&
+            !button.classList.contains("divide")
+          ) {
+            input.value += span.innerHTML;
+            par.innerHTML += span.innerHTML;
+          }
+          //symbol button
+          else if (
+            button.classList.contains("plus") ||
+            button.classList.contains("minus") ||
+            button.classList.contains("multiply") ||
+            button.classList.contains("divide")
+          ) {
+            //math operation
+            if (num === "") {
+              num = Number(input.value);
+              input.value = "";
+              par.innerHTML += span.innerHTML;
+              symb = span.innerHTML;
+            } else {
+              if (symb === "+") {
+                input.value = num + Number(input.value);
+                num = Number(input.value);
+                symb = span.innerHTML;
+                input.value = "";
+              } else if (symb === "-") {
+                input.value = num - Number(input.value);
+                num = Number(input.value);
+                symb = span.innerHTML;
+                input.value = "";
+              } else if (symb === "*") {
+                input.value = num * Number(input.value);
+                num = Number(input.value);
+                symb = span.innerHTML;
+                input.value = "";
+              } else if (symb === "/") {
+                input.value = num / Number(input.value);
+                num = Number(input.value);
+                symb = span.innerHTML;
+                input.value = "";
+              }
+              par.innerHTML += span.innerHTML;
+            }
+          }
+          //button equal
+          else if (button.classList.contains("equal")) {
+            if (symb === "+") {
+              input.value = num + Number(input.value);
+            } else if (symb === "-") {
+              input.value = num - Number(input.value);
+            } else if (symb === "*") {
+              input.value = num * Number(input.value);
+            } else if (symb === "/") {
+              input.value = num / Number(input.value);
+            }
+            num = "";
+            symb = "";
+            par.innerHTML += " = " + input.value;
+          }
+          // clear input
+          else if (button.classList.contains("clear")) {
+            num = "";
+            input.value = "";
+            symb = "";
+            par.innerHTML = "";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
