@@ -31,8 +31,6 @@ input {
   box-shadow: -1px 1px rgb(48, 47, 47);
 }
 
-
-
 .active_button {
   cursor: pointer;
   background-color: rgb(236, 235, 235);
@@ -42,4 +40,10 @@ input {
   position: relative;
   top: 40%;
   left: 40%;
+}
+
+.memory_save span, .memory_read span, .memory_clear span {
+  position: relative;
+  top: 40%;
+  left: 25%;
 }

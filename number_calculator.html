@@ -12,6 +12,12 @@
       <p></p>
       <input type="text" disabled />
       <div class="row">
+        <div class="memory_save"></div>
+        <div class="memory_read"></div>
+        <div class="memory_clear"></div>
+        <div class="clear"></div>
+      </div>
+      <div class="row">
         <div></div>
         <div></div>
         <div></div>
@@ -30,7 +36,7 @@
         <div class="multiply"></div>
       </div>
       <div class="row">
-        <div class="clear"></div>
+        <div class="point"></div>
         <div></div>
         <div class="equal"></div>
         <div class="divide"></div>
@@ -61,16 +67,44 @@
        */
 
       let buttons = document.querySelectorAll("#wrap .row div");
-      let symbol = [7, 8, 9, "+", 4, 5, 6, "-", 1, 2, 3, "*", "C", 0, "=", "/"];
+      let symbol = [
+        "MS",
+        "MR",
+        "MC",
+        "C",
+        7,
+        8,
+        9,
+        "+",
+        4,
+        5,
+        6,
+        "-",
+        1,
+        2,
+        3,
+        "*",
+        ".",
+        0,
+        "=",
+        "/",
+      ];
       let input = document.querySelector("input");
       let par = document.querySelector("p");
       let num = "";
       let symb = "";
+      let memory = "";
 
       for (let button of buttons) {
         let span = document.createElement("span");
         span.innerHTML = symbol.splice(0, 1);
-        span.classList.add("button_symb");
+        if (
+          !button.classList.contains("memory_save") &&
+          !button.classList.contains("memory_read") &&
+          !button.classList.contains("memory_clear")
+        ) {
+          span.classList.add("button_symb");
+        }
         button.appendChild(span);
 
         button.addEventListener("mouseover", function () {
@@ -88,7 +122,10 @@
             !button.classList.contains("multiply") &&
             !button.classList.contains("clear") &&
             !button.classList.contains("equal") &&
-            !button.classList.contains("divide")
+            !button.classList.contains("divide") &&
+            !button.classList.contains("memory_save") &&
+            !button.classList.contains("memory_read") &&
+            !button.classList.contains("memory_clear")
           ) {
             input.value += span.innerHTML;
             par.innerHTML += span.innerHTML;
@@ -152,6 +189,19 @@
             input.value = "";
             symb = "";
             par.innerHTML = "";
+          } 
+          // buttons memory
+          else if (button.classList.contains("memory_save")) {
+            memory = Number(input.value);
+            par.innerHTML += ' M ' + '<br>';
+            input.value = "";
+          } else if (button.classList.contains("memory_read")) {
+            input.value = memory;
+            par.innerHTML += memory;
+          }
+          else if (button.classList.contains("memory_clear")) {
+            memory = '';
+            par.innerHTML += ' MC ' + '<br>';
           }
         });
       }
