@@ -7,53 +7,39 @@
     <title>Linear calendar</title>
   </head>
   <body>
-    <p></p>
-    <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-      <li>13</li>
-      <li>14</li>
-      <li>15</li>
-      <li>16</li>
-      <li>17</li>
-      <li>18</li>
-      <li>19</li>
-      <li>20</li>
-      <li>21</li>
-      <li>22</li>
-      <li>23</li>
-      <li>24</li>
-      <li>25</li>
-      <li>26</li>
-      <li>27</li>
-      <li>28</li>
-      <li>29</li>
-      <li>30</li>
-      <li>31</li>
+    <ul id="top">
+      <li><a href="#" class="back">&larr; Назад</a></li>
+      <li class="dat"></li>
+      <li><a href="#" class="forth">Вперед &rarr;</a></li>
     </ul>
+    <ul id="calendar"></ul>
     <script>
       "use strict";
       /*Выведите в виде списка ul все числа текущего месяца. 
         Средствами CSS поставьте пункты списка в ряд.*/
+
+      let calendar = document.querySelector("#calendar");
+      let lastDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; //excluding leap year
+      let date = new Date();
+
+      for (let i = 1; i <= lastDays[date.getMonth()]; i++) {
+        let li = document.createElement("li");
+        li.innerHTML = i;
+        calendar.appendChild(li);
+      }
+
       /*Сделайте так, чтобы текущий день в календаре был выделен 
         каким-нибудь цветом.*/
-      let lis = document.querySelectorAll("ul li");
-      let date = new Date();
-      lis[date.getDate() - 1].classList.add("now_day");
+      function nowDay() {
+        let lis = document.querySelectorAll("#calendar li");
+        lis[date.getDate() - 1].classList.add("now_day");
+      }
+      nowDay();
 
       /*Сделайте так, чтобы над списком было написано название 
         текущего месяца по-русски и номер года.*/
-      let par = document.querySelector("p");
+
+      let fullDat = document.querySelector(".dat");
 
       let arrMonth = [
         "Январь",
@@ -70,7 +56,55 @@
         "Декабрь",
       ];
 
-      par.innerHTML = arrMonth[date.getMonth()] + " " + date.getFullYear();
+      //function display month and year
+      function getfullDat(month, year) {
+        if (month > 11) {
+          let dateNext = new Date(year, month);
+          fullDat.innerHTML =
+            arrMonth[dateNext.getMonth()] + " " + dateNext.getFullYear();
+          return dateNext.getMonth();
+        } else if (month < 0) {
+          let datePrev = new Date(year, month);
+          fullDat.innerHTML =
+            arrMonth[datePrev.getMonth()] + " " + datePrev.getFullYear();
+          return datePrev.getMonth();
+        } else {
+          fullDat.innerHTML = arrMonth[month] + " " + year;
+          return month;
+        }
+      }
+
+      getfullDat(date.getMonth(), date.getFullYear());
+
+      /*Сделайте так, чтобы над календарем появились ссылки вперед и назад, 
+      позволяющие менять месяц. Месяц и год, выводимые над календарем, 
+      должны соответствовать отображаемому месяцу.*/
+
+      let forth = document.querySelector(".forth");
+      let back = document.querySelector(".back");
+      let j = 0;
+
+      back.addEventListener("click", function () {
+        j--;
+        newMonthDate(getfullDat(date.getMonth() + j, date.getFullYear()));
+      });
+
+      forth.addEventListener("click", function () {
+        j++;
+        newMonthDate(getfullDat(date.getMonth() + j, date.getFullYear()));
+      });
+
+      //clear the date of the previous month and add a new one
+      function newMonthDate(month) {
+        while (calendar.firstChild) {
+          calendar.removeChild(calendar.firstChild);
+        }
+        for (let i = 1; i <= lastDays[month]; i++) {
+          let li = document.createElement("li");
+          li.innerHTML = i;
+          calendar.appendChild(li);
+        }
+      }
     </script>
   </body>
 </html>
