@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Поиск тегов</h1>
+    <div>
+      <input type="text" placeholder="Введите имя тега" />
+      <p></p>
+    </div>
+    <script>
+      "use strict";
+      /*
+        Пусть в этом скрипте будет инпут, в который пользователь будет вводить имя HTML тега. 
+        После этого по нажатию на Enter под инпутом пусть выдается описание этого тега.
+        */
+      let input = document.querySelector("input");
+      let par = document.querySelector("p");
+
+      let tegInfo = {
+        a: "Тег a создает ссылку на другую страницу своего или чужого сайта",
+        body: "Тег body содержит в себе основное содержимое страницы",
+        br: "Тег br создает разрыв строки",
+        class: "Атрибут class задает один или несколько классов для элемента",
+        div: "Тег div задает блок, который объединяет в себе другие теги",
+        form: "Тег form создает форму для отправки данных на сервер",
+        li: "Тег li задает пункт упорядоченного списка",
+        main: "Тег main задает верхнюю часть страницы в HTML",
+        nav:
+          "Элемент <nav> (от англ. navigation — навигация) задаёт навигацию по сайту",
+        ol:
+          "Тег ol создает так называемый упорядоченный список с маркерами в виде цифр",
+        p: "Тег p создает абзац",
+        radio:
+          "Радио переключатель представляет собой элемент HTML формы в виде круглой кнопочки, которая может быть отмечена и нет",
+        span: "Тег span позволяет выделить кусочек текста",
+        table: "Тег table создает таблицу",
+        ul:
+          "Тег ul создает так называемый неупорядоченный список с маркерами в виде точек",
+        value:
+          "Атрибут value задает значение по умолчанию для поля ввода HTML формы",
+        h1: "Тег h1 создает заголовок 1-го уровня",
+        img: "Тег img создает картинку",
+      };
+
+      input.addEventListener("keypress", function (event) {
+        if (event.keyCode === 13) {
+          let key = input.value;
+
+          if (tegInfo[key] === undefined) {
+            par.innerHTML = "Тег не найден";
+          } else {
+            par.innerHTML = tegInfo[key];
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
