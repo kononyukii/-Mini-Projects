@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="wrap">
+      <h1>Гороскоп</h1>
+      <p>Введите дату вашего рождения</p>
+      <input type="text" id="input" placeholder="дд.мм" /> <br />
+    </div>
+    <script>
+      "use strict";
+      /*
+         Пусть пользователь по заходу на сайт видит инпут, в который нужно вбить дату своего рождения. 
+         Пусть по нажатию Enter наш сайт выдаст пользователю гороскоп на текущий день за его знак Зодиака.
+         */
+
+      let div = document.querySelector("#wrap");
+      let input = document.querySelector("#input");
+
+      //Реализуйте показ гороскопа за текущий день.
+      let date = new Date();
+      let arrMonth = [
+        "Января",
+        "Февраля",
+        "Марта",
+        "Апреля",
+        "Майя",
+        "Июня",
+        "Июля",
+        "Августа",
+        "Сентября",
+        "Октября",
+        "Ноября",
+        "Декабря",
+      ];
+      let nowDate = date.getDate() + " " + arrMonth[date.getMonth()];
+
+      let info = document.createElement("p");
+      div.appendChild(info);
+
+      input.addEventListener("keyup", function checkDate(event) {
+        this.value = this.value.replace(/[^0-9.]/g, "");
+
+        if (event.keyCode === 13) {
+          let dat = input.value.split(".").reverse().join(".");
+
+          if (dat >= "03.21" && dat <= "04.19") {
+            info.innerHTML =
+              "<b>" + "Овен: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "04.20" && dat <= "05.20") {
+            info.innerHTML =
+              "<b>" + "Телец: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "05.21" && dat <= "06.20") {
+            info.innerHTML =
+              "<b>" + "Близнецы: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "06.21" && dat <= "07.22") {
+            info.innerHTML =
+              "<b>" + "Рак: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "07.23" && dat <= "08.22") {
+            info.innerHTML =
+              "<b>" + "Лев: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "08.23" && dat <= "09.22") {
+            info.innerHTML =
+              "<b>" + "Дева: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "09.23" && dat <= "10.22") {
+            info.innerHTML =
+              "<b>" + "Весы: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "10.23" && dat <= "11.21") {
+            info.innerHTML =
+              "<b>" + "Скорпион: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "11.22" && dat <= "12.21") {
+            info.innerHTML =
+              "<b>" + "Стрелец: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (
+            (dat >= "12.22" && dat <= "12.31") ||
+            (dat >= "01.01" && dat <= "01.19")
+          ) {
+            info.innerHTML =
+              "<b>" + "Козерог: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "01.20" && dat <= "02.18") {
+            info.innerHTML =
+              "<b>" + "Водолей: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+          if (dat >= "02.19" && dat <= "03.20") {
+            info.innerHTML =
+              "<b>" + "Рыбы: " + "</b>" + nowDate + " вам стоит ожидать...";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
