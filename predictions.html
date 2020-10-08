@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Predictions</title>
+  </head>
+  <body>
+    <div id="parent">
+      <div id="timer">?</div>
+      <div id="text"></div>
+      <button id="start" class="active">узнать свою судьбу</button>
+      <button id="stop">получить предсказание</button>
+    </div>
+    <script>
+      "use strict";
+      /*сделаем сайт, который будет выдавать предсказания. 
+      Пусть на этом сайте будет кнопка, по нажатию на которую будет 
+      запускаться таймер, который будет каждые 0.1 секунд выводить 
+      в какой-нибудь див случайное число от 1 до некоторого максимального. */
+
+      let timer = document.querySelector("#timer");
+      let start = document.querySelector("#start");
+      let stop = document.querySelector("#stop");
+      let text = document.querySelector("#text");
+
+      let timerId;
+      let i = 1;
+
+      let predictions = [
+        "Если Вы проявите инициативу, успех все равно не ваше...",
+        "Ваши надежды и планы сбудутся сверх всяких ожиданий.",
+        "Готовьтесь к романтическим приключениям вашей второй половинки",
+        "В этом месяце ночная жизнь для вас.",
+        "Вас ждет неприятный сюрприз",
+        "Вам предлагается мечта всей жизни. Скажите да!",
+        "Время – не ваш союзник, вы все еще стареете",
+        "Время и терпение,  вас ждут много сюрпризов!",
+        "Время принесет слезы и раны - готовьтесь...",
+      ];
+
+      start.addEventListener("click", function () {
+        timerId = setInterval(function () {
+          if (i == 10) {
+            i = 1;
+          } else {
+            timer.innerHTML = i++;
+          }
+        }, 100);
+        timer.innerHTML = 1;
+        start.classList.remove("active");
+        stop.classList.add("active");
+      });
+
+      stop.addEventListener("click", function () {
+        text.innerHTML = "<i>" + predictions[timer.innerHTML - 1];
+        +"</i>";
+
+        if (timer.innerHTML % 2 == 0) {
+          text.classList.add("good");
+        } else {
+          text.classList.add("bad");
+        }
+        clearInterval(timerId);
+
+        stop.classList.remove("active");
+      });
+    </script>
+  </body>
+</html>
