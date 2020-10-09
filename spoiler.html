@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Хорошее кино</p>
+    <p>
+      все было очень непредсказуемо, ведь оказалось что
+      <a href="" class="toggler">развернуть спойлер </a>
+    </p>
+    <p class="spoiler">убийца садовник.</p>
+    <p>Удивительный поворот сюжета,</p>
+    <p>
+      ведь авторы все время пытались убедить нас что
+      <a href="" class="toggler">развернуть спойлер </a>
+    </p>
+    <p class="spoiler">повар убийца</p>
+    <p>однозначно рекомендую к просмотру!</p>
+    <script>
+      "use strict";
+      /* Сейчас мы с вами научимся делать спойлеры. Под спойлерами я понимаю блоки, 
+      которые можно развернуть, либо свернуть с помощью специальной ссылки.*/
+
+      let togglers = document.querySelectorAll(".toggler");
+
+      for (let toggler of togglers) {
+        toggler.addEventListener("click", function (event) {
+          this.parentElement.nextElementSibling.classList.toggle("active");
+          event.preventDefault();
+        });
+      }
+    </script>
+  </body>
+</html>

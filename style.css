@@ -1,24 +1,12 @@
-#parent {
-	position: relative;
-}
-#elem {
-	padding: 5px;
-	font-size: 18px;
+.spoiler:not(.active) {
+	display: none;
 }
 
-#parent ul {
-	position: absolute;
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	background-color: white;
+.spoiler {
+	font-style: italic;
 }
-#parent li {
-	border: 1px solid gray;
-	font-size: 18px;
-	padding: 5px;
-}
-#parent li:hover {
-	border: 1px solid black;
-	cursor: pointer;
+
+.toggler {
+	color: blue;
+	text-decoration: none;
 }
