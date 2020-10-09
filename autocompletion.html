@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>autocompletion</title>
+  </head>
+  <body>
+    <div id="parent">
+      <input id="elem" />
+      <ul id="list"></ul>
+    </div>
+    <script>
+      "use strict";
+      /* Сейчас мы с вами реализуем автодополнение. 
+      Под этим термином понимается выпадающая подсказка при вводе текста 
+      в инпут.*/
+
+      let elem = document.querySelector("#elem");
+      let list = document.querySelector("#list");
+
+      let countries = [
+        "Belarus",
+        "Belgium",
+        "Bulgaria",
+        "Ukraine",
+        'Uganda',
+        "Poland",
+        'Panama',
+        'Paraguay',
+        'Guatemala',
+        "Germany",
+      ];
+
+      elem.addEventListener("input", function () {
+        removeOldValue(list);
+        for (let country of countries) {
+          if (country.startsWith(elem.value) && elem.value.length != 0) {
+            let li = document.createElement("li");
+            li.innerHTML = country;
+            list.appendChild(li);
+
+            let lis = document.querySelectorAll("#list li");
+
+            for (let li of lis) {
+              li.addEventListener("click", function () {
+                elem.value = this.innerHTML;
+                removeOldValue(list);
+              });
+            }
+          }
+        }
+      });
+
+
+      function removeOldValue(parent) {
+        while (parent.firstChild) {
+          parent.removeChild(parent.firstChild);
+        }
+      }
+    </script>
+  </body>
+</html>
