@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Accordion JS</title>
+  </head>
+  <body>
+    <div id="parent">
+      <div class="tab active">
+        <div class="link">
+          <a href="#">вкладка 1</a>
+        </div>
+        <div class="text">текст вкладки 1</div>
+      </div>
+      <div class="tab">
+        <div class="link">
+          <a href="#">вкладка 2</a>
+        </div>
+        <div class="text">текст вкладки 2</div>
+      </div>
+      <div class="tab">
+        <div class="link">
+          <a href="#">вкладка 3</a>
+        </div>
+        <div class="text">текст вкладки 3</div>
+      </div>
+    </div>
+    <script>
+      "use strict";
+      /* Давайте теперь реализуем аккордеон. Он похож на вкладки, перевернутые на бок. 
+      При этом в аккордеоне можно закрыть текущую вкладку, если нажать на активную ссылку.*/
+
+      let links = document.querySelectorAll(".tab .link a");
+      let tabs = document.querySelectorAll(".tab");
+
+      for (let link of links) {
+        link.addEventListener("click", function () {
+          if (link.closest(".tab").classList.contains("active")) {
+            removeClass();
+          } else {
+            removeClass();
+            link.closest(".tab").classList.add("active");
+          }
+        });
+      }
+
+      function removeClass() {
+        for (let tab of tabs) {
+          tab.classList.remove("active");
+        }
+      }
+    </script>
+  </body>
+</html>
