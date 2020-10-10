@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="parent">
+      <div class="menu">
+        <a href="" class="active">вкладка 1</a>
+        <a href="">вкладка 2</a>
+        <a href="">вкладка 3</a>
+        <a href="">вкладка 4</a>
+      </div>
+      <div class="tabs">
+        <div class="tab active">текст вкладки 1</div>
+        <div class="tab">текст вкладки 2</div>
+        <div class="tab">текст вкладки 3</div>
+        <div class="tab">текст вкладки 4</div>
+      </div>
+    </div>
+    <script>
+      "use strict";
+      // Сейчас мы с вами реализуем вкладки.
+
+      let buttons = document.querySelectorAll(".menu a");
+      let tabs = document.querySelectorAll(".tabs .tab");
+
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function (event) {
+          for (let button of buttons) {
+            button.classList.remove("active");
+          }
+          for (let tab of tabs) {
+            tab.classList.remove("active");
+          }
+          buttons[i].classList.add("active");
+          tabs[i].classList.add("active");
+
+          event.preventDefault();
+        });
+      }
+    </script>
+  </body>
+</html>
