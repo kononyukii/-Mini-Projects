@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="field" />
+    <div id="message"></div>
+    <script>
+      "use strict";
+      /* Давайте теперь реализуем аккордеон. Он похож на вкладки, перевернутые на бок.
+      При этом в аккордеоне можно закрыть текущую вкладку, если нажать на активную ссылку.*/
+
+      let field = document.querySelector("#field");
+      let message = document.querySelector("#message");
+
+      let sities = [];
+
+      field.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          if (sities.length != 0) {
+            checkArray(sities, field.value);
+            field.value = '';
+          } else {
+            sities.push(field.value);
+            field.value = '';
+          }
+        }
+      });
+
+      function checkArray(arr, word) {
+        let lastWord = arr.slice(-1);
+        let lastSymb = lastWord[0].substr(-1).toUpperCase();
+        if (arr.indexOf(word) === -1 && word.startsWith(lastSymb)) {
+          arr.push(word);
+          message.innerHTML = "Ответ верен ходит следующий игрок!"
+          message.classList.remove('wrong');
+          message.classList.add('right');
+        } else {
+          message.innerHTML = "Ответ не верен попробуйте еще раз!"
+          message.classList.remove('right');
+          message.classList.add('wrong');
+        }
+      }
+    </script>
+  </body>
+</html>
