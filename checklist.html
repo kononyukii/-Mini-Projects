@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Checklist</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <input id="input"><br>
+      <ul id="list"></ul>
+    </div>
+    <script>
+      "use strict";
+      /*В данном уроке мы с вами реализуем чеклист. 
+      Чеклистом называется программа, которая позволяет сделать список планируемых дел, 
+      а затем по мере выполнения этим дел отмечать эти дела сделанными.*/
+      let input = document.querySelector("#input");
+      let list = document.querySelector("#list");
+
+      input.addEventListener("keypress", function (event) {
+        if (event.key == "Enter") {
+          let li = document.createElement("li");
+
+          let task = document.createElement("span");
+          task.classList.add("task");
+          task.innerHTML = this.value;
+          task.addEventListener("dblclick", function () {
+            let input = document.createElement("input");
+            input.value = this.innerHTML;
+            this.innerHTML = "";
+            this.appendChild(input);
+
+            input.addEventListener("keypress", function (event) {
+              if (event.key == "Enter") {
+                task.innerHTML = this.value;
+                this.parentElement.removeChild(this);
+              }
+            });
+          });
+          li.appendChild(task);
+
+          let remove = document.createElement("span");
+          remove.classList.add("remove");
+          remove.innerHTML = "удалить";
+          remove.addEventListener("click", function () {
+            list.removeChild(this.parentElement);
+          });
+          li.appendChild(remove);
+
+          let mark = document.createElement("span");
+          mark.classList.add("mark");
+          mark.innerHTML = "сделано";
+          mark.addEventListener("click", function () {
+            this.parentElement.classList.add("done");
+          });
+          li.appendChild(mark);
+
+          list.appendChild(li);
+
+          this.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>
